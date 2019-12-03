@@ -12,7 +12,7 @@
 
 区块链安全服务平台一共提供五大类功能：
 
-![](D:\Projects\Smart Contract\result\Image\platform_1.png)
+![](.\Image\platform_1.png)
 
 此次调研对区块链安全服务平台提供的
 
@@ -46,11 +46,11 @@
 
 实际测试中发现平台仅支持Solidity语言的智能合约安全检测
 
-![](D:\Projects\Smart Contract\result\Image\online_checking_1.png)
+![](.\Image\online_checking_1.png)
 
 尝试进行了Vyper智能合约的检测，检测工具提示编译失败，视其为不合法代码。
 
-![](D:\Projects\Smart Contract\result\Image\online_checking_2.png)
+![](.\Image\online_checking_2.png)
 
 ### 结论：
 
@@ -64,7 +64,7 @@
 
 参见免费版、企业版和人工审计检测内容比较图：
 
-![](D:\Projects\Smart Contract\result\Image\compareversion.png)
+![](.\Image\compareversion.png)
 
 ------
 
@@ -146,7 +146,7 @@ contract TxOriginVTest {
 
 #### 检测结果：
 
-![](D:\Projects\Smart Contract\result\Image\txOrigin.png)
+![](.\Image\txOrigin.png)
 
 ```Text
 PID: 30236
@@ -201,7 +201,7 @@ line: 9
 
 使用在线版的扫描检测，未能发现 tx Origin 安全漏洞
 
-![](D:\Projects\Smart Contract\result\Image\txOrigin_online.png)
+![](.\Image\txOrigin_online.png)
 
 
 
