@@ -445,7 +445,7 @@ No problem was found in the contract
 ---end---
 ```
 
-将合约中的构造函数改为与合约同名再次扫描：
+将合约中的构造函数改为与合约同名，再次扫描无漏洞检出：
 
 ```javascript
 pragma solidity 0.4.23;
@@ -460,20 +460,22 @@ contract ConstructLeak {
 }
 ```
 
-工具未能检出错误：
+更改Solidity版本，由于插件必须对应匹配版本，亦无法检出漏洞。但此时Solidity高版本的编译器实际会警告<font color = daa520 size = 3 face="calibri">构造函数与合约重名的方法已废弃，建议使用 constructor 关键字。</font>
 
-```Text
-PID: 30308
+```javascript
+pragma solidity 0.4.18;
 
-start compile!
-compile over!
-start deploy!
-deploy over!
-No problem was found in the contract
----end---
+contract ConstructLeak {
+    string public str;
+
+    // 构造函数
+    function ConstructLeak (string _str) public {
+        str = _str;
+    }
+}
 ```
 
-暂认为在该版本，针对<font color = daa520 size = 4 face="calibri"> Constructor Mistyping </font>代码漏洞，工具检测失败。
+因此，从逻辑层面来看，暂认为针对<font color = daa520 size = 4 face="calibri"> Constructor Mistyping </font>代码漏洞，工具检测失败。
 
 
 
