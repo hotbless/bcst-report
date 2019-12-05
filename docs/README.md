@@ -460,7 +460,7 @@ contract ConstructLeak {
 }
 ```
 
-更改Solidity版本，由于插件必须对应匹配版本，亦无法检出漏洞。但此时Solidity高版本的编译器实际会警告<font color = daa520 size = 3 face="calibri">构造函数与合约重名的方法已废弃，建议使用 constructor 关键字。</font>
+更改Solidity版本，由于插件必须对应匹配版本，亦无法检出漏洞。但此时Solidity高版本的编译器实际会警告<font color = daa520 size = 3 face="calibri">构造函数与合约重名的方法已废弃，建议使用</font> <font color = daa520 size = 4 face="calibri">Constructor</font> <font color = daa520 size = 3 face="calibri">关键字</font>。
 
 ```javascript
 pragma solidity 0.4.18;
