@@ -394,6 +394,89 @@ contract ForceEtherVT {
 
 
 
+### 案例4
+
+#### 覆盖内容：
+
+|     类型     |                      检测项                      |
+| :----------: | :----------------------------------------------: |
+| 代码规范检测 | <font color = daa520>Construtor Mistyping</font> |
+
+#### 说明：
+
+<font color = daa520 size = 4 face="calibri">Constructor Mistyping </font>
+
+```javascript
+Construtor Mistyping:
+
+在Solidity 0.4.22版本之前，构造函数可以用与合约名称相同的函数定义。
+这样，如果合约名称被修改，而忽略了构造函数名称的修改，会导致漏洞。
+
+因此，从Solidity 0.4.22版本开始，用关键字 constructor 来指明构造函数
+```
+
+智能合约漏洞代码：
+
+创建Solidity 0.4.23版本的智能合约：
+
+```javascript
+pragma solidity 0.4.23;
+
+contract ConstructLeak {
+    string public str;
+
+    // 构造函数
+    construtor (string _str) public {
+        str = _str;
+    }
+}
+```
+
+工具扫描后报告正常：
+
+```Text
+PID: 5736
+
+start compile!
+compile over!
+start deploy!
+deploy over!
+No problem was found in the contract
+---end---
+```
+
+将合约中的构造函数改为与合约同名再次扫描：
+
+```javascript
+pragma solidity 0.4.23;
+
+contract ConstructLeak {
+    string public str;
+
+    // 构造函数
+    function ConstructLeak (string _str) public {
+        str = _str;
+    }
+}
+```
+
+工具未能检出错误：
+
+```Text
+PID: 30308
+
+start compile!
+compile over!
+start deploy!
+deploy over!
+No problem was found in the contract
+---end---
+```
+
+暂认为在该版本，针对<font color = daa520 size = 4 face="calibri"> Constructor Mistyping </font>代码漏洞，工具检测失败。
+
+
+
 ### 整体结论：
 
 自行编写带漏洞的solidity智能合约，将其提交至安全检测工具进行扫描检测。一部分平台声称覆盖的合约漏洞能够被发现；但与此同时，另一些列出的检测项却未能正确运作。工具尚有待完善，待改进部分较多，同时也产生了不佳的用户体验，对收费的企业版功能存疑。
