@@ -494,27 +494,38 @@ contract ConstructLeak {
 主要针对合约编写时的一些代码规范进行检测，共有11小项。
 
 - 1.1 `ERC规范`
-   包含了以太坊C20，ERC721，ERC1400，ERC1404，ERC223，ERC777等常见的合约标准检测，确保了开发人员能正确实现这些标准。
+
+  包含了以太坊C20，ERC721，ERC1400，ERC1404，ERC223，ERC777等常见的合约标准检测，确保了开发人员能正确实现这些标准。
+
 - 1.2 `Transfer To Zero Address`
-   在`transfer`、`transferFrom`、`transferOwnership`等敏感函数中，用户操作不可逆，所以建议开发者在这些函数实现中增加目标地址非零检查，避免用户误操作导致用户权限丢失和财产损失
+   在transfer、transferFrom、transferOwnership等敏感函数中，用户操作不可逆，所以建议开发者在这些函数实现中增加目标地址非零检查，避免用户误操作导致用户权限丢失和财产损失
+
 - 1.3 `TX Origin Authentication`
    `tx.origin`是Solidity的一个状态变量，它遍历整个调用栈并返回最初发送调用（或事务）的帐户的地址。在智能合约中使用此变量进行身份验证会使合约容易受到类似网络钓鱼的攻击。
+
 - 1.4 `Constructor Mistyping`
    构造函数仅在合约部署的时候被调用，合约owner的设置一般放在构造函数中，合约的构造函数还会执行初始化的操作。在使用`function`的方式定义构造函数时，如果函数名与合约名失配，就变成了一个普通函数。那么，合约将存在重大安全风险。
+
 - 1.5 `Complex Code In Fallback Function`
    合约的`fallback`函数通常用以接收一笔`eth`转账，但如果在`fallback`里实现过于复杂的逻辑，可能会将`gas`耗尽，导致转账不成功。
+
 - 1.6 `Unary Operation`
    当定义的操作的意图是将数字与变量`+=`相加但却意外地以错误的方式定义`=+`时，会出现错误。它不是计算总和，而是再次初始化变量。
+
 - 1.7 `Redefine Variable From Base Contracts`
    Solidity中同一合约或不同合约允许有相同的状态变量，他们不会构成直接威胁，在单个相当于重新定义了这个变量，在多个合约中继承使用时会出现先后关系和使用错误的情况，所以尽量避免出现相同的状态变量。
+
 - 1.8 `Unused Variables`
    Solidity中允许有未使用的变量，它们不会构成直接的安全问题，但会降低代码的可读性并且额外占用存储空间导致部署时的资源消耗增加。
-- 1.9 No Return
+
+- 1.9 `No Return`
    如果声明一个函数有返回值，而最后没给它返回值，就会产生一个默认的返回值，而默认返回值和实际执行后的返回值可能存在差异。
-- 1.10 Overload Syscall
-   对于`Solidity`已内置函数如`assert`，如果在合约中进行了重定义，可能会出现异常。
-- 1.11 Fake Recharge Vulnerability
-   `ERC20`合约在`transfer`函数中可能失败，这时函数并没有异常退出，而是`return false;`如果交易所根据调用状态来判断转账是否成功，将会导致错误的判断。
+
+- 1.10 `Overload Syscall`
+   对于Solidity已内置函数如`assert`，如果在合约中进行了重定义，可能会出现异常。
+
+- 1.11 `Fake Recharge Vulnerability`
+   ERC20合约在`transfer`函数中可能失败，这时函数并没有异常退出，而是`return false;`如果交易所根据调用状态来判断转账是否成功，将会导致错误的判断。
 
 ### 2.函数调用检测
 
