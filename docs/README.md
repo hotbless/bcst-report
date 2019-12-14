@@ -49,17 +49,27 @@
 
 ### 产品定位
 
-​       <font color = d2b48c>安全服务平台针对担心源代码泄漏的用户，推出离线插件版工具；又为持观望态度的潜在用户，提供快捷的在线版试用；在此基础上，通过提供功能扩展的企业版，以及人工审计服务，来进一步细分客户群体。</font>产品定位清晰，目标明确，值得借鉴。
+​       <font color = d2b48c>安全服务平台针对担心源代码泄漏的用户，推出离线插件版工具；又为持观望态度的潜在用户，提供快捷的在线版试用；在此基础上，通过提供功能扩展的企业版，以及人工审计服务，来进一步细分客户群体。</font>
+
+​       个人观点：产品定位清晰，目标明确，值得借鉴。
 
 ### 试用结论
 
-​      <font color = d2b48c>1. 工具目前仅适用于以太坊solidity智能合约的安全扫描检测</font>。由于限定了区块链类型和合约语言，不具泛用性。当使用非solidity语言开发智能合约时，其参考价值有限。
+​      <font color = d2b48c>1. 工具目前仅适用于以太坊solidity智能合约的安全扫描检测。</font>
 
-​       <font color = d2b48c>2. 实际使用过程中，发现离线插件版和在线运行版工具扫描结果存有不一致情况。</font>由于两者核心部分相同，且均存在一方探知漏洞而对方却无法检出的情况。因此，暂认为这种结果差异是工具自身问题，而非市场行为所致。
+​       个人观点：由于限定了区块链类型和合约语言，不具备泛用性。当使用非solidity语言开发智能合约时，其参考价值有限。
 
-​       <font color = d2b48c>单就离线版而言，通过编写带漏洞的solidity智能合约提交检测，发现一部分声称已覆盖的检测项未能正确运作，使得合约中存在的某些漏洞未被发现。</font>由此，给个人带来了不佳的用户体验，暂认为工具尚有不少有待改进之处，同时也导致对收费的企业版完全功能存疑。
+​       <font color = d2b48c>2. 实际使用过程中，发现离线插件版和在线运行版工具扫描结果存有不一致情况。</font>
 
-​       <font color = d2b48c>3. 然而，他山之石可以攻玉。 安全服务平台归纳出的具体检测项种类，深入语言规范的思路，以及从以太坊实际黑客行为中总结的方法，很有学习意义。</font>当检测其它语言开发的智能合约时，也需对其特性和限制进行挖掘，结合区块链平台具体事例，才能开发出更完善、更具泛用性的安全工具。
+​        个人观点：由于两者核心部分相同，且均存在一方探知漏洞而对方却无法检出的情况。因此，暂认为这种结果差异是工具自身问题，而非市场行为所致。
+
+​       <font color = d2b48c>单就离线版而言，通过编写带漏洞的solidity智能合约提交检测，发现一部分声称已覆盖的检测项未能正确运作，使得合约中存在的某些漏洞未被发现。</font>
+
+​        个人观点：给个人带来了不佳的用户体验，暂认为工具尚有不少有待改进之处，同时也导致对收费的企业版完全功能存疑。
+
+​       <font color = d2b48c>3. 然而，他山之石可以攻玉。 安全服务平台归纳出的具体检测项种类，深入语言规范的思路，以及从以太坊实际黑客行为中总结的方法，很有学习意义。</font>
+
+​       个人观点：当检测其它语言开发的智能合约时，也需对其特性和限制进行挖掘，结合区块链平台具体事例，才能开发出更完善、更具泛用性的安全工具。
 
 ---
 
@@ -485,9 +495,9 @@ contract ConstructLeak {
 
 
 
-## 5.附录部分
+## 5.附录
 
-<font color = 8fbc8f>注：此部分为所有检测项内容的具体说明</font>
+注：本节为区块链安全服务平台所有检测项内容的具体说明。以下将用<font color = 8fbc8f>"绿色"</font>标出具备一定通用性可能，可作为实际工作参考借鉴，用于检测不同语言开发的智能合约的部分。
 
 ### 1.代码规范检测
 
@@ -497,17 +507,17 @@ contract ConstructLeak {
 
   包含了以太坊C20，ERC721，ERC1400，ERC1404，ERC223，ERC777等常见的合约标准检测，确保了开发人员能正确实现这些标准。
 
-- 1.2 `Transfer To Zero Address`
+- <font color = 8fbc8f>1.2 `Transfer To Zero Address`</font>
 
-  在transfer、transferFrom、transferOwnership等敏感函数中，用户操作不可逆，所以建议开发者在这些函数实现中增加目标地址非零检查，避免用户误操作导致用户权限丢失和财产损失
+  <font color = 8fbc8f>在transfer、transferFrom、transferOwnership等敏感函数中，用户操作不可逆，所以建议开发者在这些函数实现中增加目标地址非零检查，避免用户误操作导致用户权限丢失和财产损失</font>
 
-- 1.3 `TX Origin Authentication`
+- <font color = 8fbc8f>1.3 `TX Origin Authentication`</font>
 
-  tx.origin是Solidity的一个状态变量，它遍历整个调用栈并返回最初发送调用（或事务）的帐户的地址。在智能合约中使用此变量进行身份验证会使合约容易受到类似网络钓鱼的攻击。
+  <font color = 8fbc8f>tx.origin是Solidity的一个状态变量，它遍历整个调用栈并返回最初发送调用（或事务）的帐户的地址。在智能合约中使用此变量进行身份验证会使合约容易受到类似网络钓鱼的攻击。</font>
 
-- 1.4 `Constructor Mistyping`
+- <font color = 8fbc8f>1.4 `Constructor Mistyping`</font>
 
-  构造函数仅在合约部署的时候被调用，合约owner的设置一般放在构造函数中，合约的构造函数还会执行初始化的操作。在使用function的方式定义构造函数时，如果函数名与合约名失配，就变成了一个普通函数。那么，合约将存在重大安全风险。
+  <font color = 8fbc8f>构造函数仅在合约部署的时候被调用，合约owner的设置一般放在构造函数中，合约的构造函数还会执行初始化的操作。在使用function的方式定义构造函数时，如果函数名与合约名失配，就变成了一个普通函数。那么，合约将存在重大安全风险。</font>
 
 - 1.5 `Complex Code In Fallback Function`
 
@@ -517,21 +527,21 @@ contract ConstructLeak {
 
   当定义的操作的意图是将数字与变量+=相加但却意外地以错误的方式定义=+时，会出现错误。它不是计算总和，而是再次初始化变量。
 
-- 1.7 `Redefine Variable From Base Contracts`
+- <font color = 8fbc8f>1.7 `Redefine Variable From Base Contracts`</font>
 
-  Solidity中同一合约或不同合约允许有相同的状态变量，他们不会构成直接威胁，在单个相当于重新定义了这个变量，在多个合约中继承使用时会出现先后关系和使用错误的情况，所以尽量避免出现相同的状态变量。
+  <font color = 8fbc8f>Solidity中同一合约或不同合约允许有相同的状态变量，他们不会构成直接威胁，在单个相当于重新定义了这个变量，在多个合约中继承使用时会出现先后关系和使用错误的情况，所以尽量避免出现相同的状态变量。</font>
 
-- 1.8 `Unused Variables`
+- <font color = 8fbc8f>1.8 `Unused Variables`</font>
 
-  Solidity中允许有未使用的变量，它们不会构成直接的安全问题，但会降低代码的可读性并且额外占用存储空间导致部署时的资源消耗增加。
+  <font color = 8fbc8f>Solidity中允许有未使用的变量，它们不会构成直接的安全问题，但会降低代码的可读性并且额外占用存储空间导致部署时的资源消耗增加。</font>
 
-- 1.9 `No Return`
+- <font color = 8fbc8f>1.9 `No Return`</font>
 
-  如果声明一个函数有返回值，而最后没给它返回值，就会产生一个默认的返回值，而默认返回值和实际执行后的返回值可能存在差异。
+  <font color = 8fbc8f>如果声明一个函数有返回值，而最后没给它返回值，就会产生一个默认的返回值，而默认返回值和实际执行后的返回值可能存在差异。</font>
 
-- 1.10 `Overload Syscall`
+- <font color = 8fbc8f>1.10 `Overload Syscall`</font>
 
-  对于Solidity已内置函数如assert，如果在合约中进行了重定义，可能会出现异常。
+  <font color = 8fbc8f>对于Solidity已内置函数如assert，如果在合约中进行了重定义，可能会出现异常。</font>
 
 - 1.11 `Fake Recharge Vulnerability`
 
@@ -565,9 +575,9 @@ contract ConstructLeak {
 
 检查可能导致业务逻辑出现安全风险的问题，共有6个检查项。
 
-- 3.1 `Block Members Manipulation`
+- <font color = 8fbc8f>3.1 `Block Members Manipulation`</font>
 
-  区块参数依赖风险主要有时间戳依赖和区块哈希依赖，这种风险主要来自于使用他们生成随机数，因为它们可以被操纵或者被攻击者获取，所以不应该用于随机种子。
+  <font color = 8fbc8f>区块参数依赖风险主要有时间戳依赖和区块哈希依赖，这种风险主要来自于使用他们生成随机数，因为它们可以被操纵或者被攻击者获取，所以不应该用于随机种子。</font>
 
 - 3.2 `Arbitrary Jump with Function Type Variable`
 
@@ -577,9 +587,9 @@ contract ConstructLeak {
 
   合约代码中严格限制了合约的资金，而大多数情况下合约资金都是可变的，因此用户能轻松利用这个特性使得合约的功能逻辑无法正常执行。
 
-- 3.4 `Function Problem`（企业版）
+- <font color = 8fbc8f>3.4 `Function Problem`（企业版）</font>
 
-  函数永远只会以`revert()`等异常状态结束，无法正常执行完后return，说明函数设计出现了问题。
+  <font color = 8fbc8f>函数永远只会以`revert()`等异常状态结束，无法正常执行完后return，说明函数设计出现了问题。</font>
 
 - 3.5 `Call Problem`（企业版）
 
@@ -593,18 +603,18 @@ contract ConstructLeak {
 
 溢出是典型的合约漏洞，可能导致检查被绕过，合约运行逻辑出错。
 
-- 4.1 `Exponent Arithmetic Overflow`
-- 4.2 `Integer Overflow`
-- 4.3 `Integer Underflow`
+- <font color = 8fbc8f>4.1 `Exponent Arithmetic Overflow`</font>
+- <font color = 8fbc8f>4.2 `Integer Overflow`</font>
+- <font color = 8fbc8f>4.3 `Integer Underflow`</font>
 
 ### 5.异常可达状态检测
 
 检测合约在执行过程中可能出现的异常状态，共有2个检查项。
 
-- 5.1 `Assert Fail`（企业版）
+- <font color = 8fbc8f>5.1 `Assert Fail`（企业版）</font>
 
-  assert的限制条件是必须满足的，在条件可能不满足的情况下会报错，说明合约运行状态异常。
+  <font color = 8fbc8f>assert的限制条件是必须满足的，在条件可能不满足的情况下会报错，说明合约运行状态异常。</font>
 
-- 5.2 `Require Fail`（企业版）
+- <font color = 8fbc8f>5.2 `Require Fail`（企业版）</font>
 
-  与assert类似，默认require条件是可能满足的，当条件在任何情况下都无法满足会报错，说明合约运行状态异常
+  <font color = 8fbc8f>与assert类似，默认require条件是可能满足的，当条件在任何情况下都无法满足会报错，说明合约运行状态异常</font>
