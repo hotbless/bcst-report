@@ -85,7 +85,7 @@
 
 
 
-以太坊官方当前主要支持的智能合约语言为Solidity和Vyper：
+以太坊当前主要支持的智能合约语言为Solidity和Vyper，来自官方说明：
 
 [Smart Contract Languages](https://ethereum.org/developers/#smart-contract-languages)
 
